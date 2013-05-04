@@ -1,0 +1,31 @@
+<!-- Christopher Eng
+Last edit: May 2, 2013
+
+Creates the layout for the tempo dialog -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#000000">
+
+  <!-- Creates a slide bar for the user to change the tempo -->
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content" />
+
+    <!-- Creates a text view to show what the current tempo is -->
+    <TextView
+        android:id="@+id/seekbarvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textColor="#ffffff"/>
+
+    <!-- Creates a button to close the tempo selection dialog -->
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OK" />
+
+</LinearLayout>

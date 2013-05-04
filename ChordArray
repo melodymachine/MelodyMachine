@@ -1,0 +1,137 @@
+package com.example.melodymachine;
+
+//import android.app.Activity;
+import android.content.Context;
+
+//import java.io.*;
+
+/**
+* Same as ChordList except only sent 1 array length 8 (chord) at a time
+* 
+* @author (your name) 
+* @version (a version number or a date)
+*/
+public class ChordArray
+{
+private int[] inputtedNote; //defining variables
+private double metronome;
+private int timer;
+private int[] a;
+private SoundManager note;
+private ArrayNode current;
+
+
+/**
+ * 
+ * @param metronomeTimer bpm
+ * @param arr array of values
+ * @param con takes context of button press
+ * @param arrr predefined matrix
+ * @param man the sound manager
+ * @throws InterruptedException
+ */
+public ChordArray(int metronomeTimer, ArrayNode arr, Context con, int[] arrr, SoundManager man) //throws InterruptedException
+{
+  if (arr != null) //if the array is not empty
+	{
+		timer = (int)metronomeTimer; //just bpm
+    	a = new int[9];
+    	for(int i = 0; i < 9; i++)
+    	{
+    		a[i] = arrr[i];		//sets a to the predefined matrix
+    	}
+    	note = man;		//brings in the sound manager
+		metronome = 60.0 / metronomeTimer * 1000.0; //turns the beats per minute to seconds per beat
+    	inputtedNote = new int[8]; //the array we will use representing note played
+    	current = arr;
+    	for(int i = 0; i < 8; i++)
+    	{
+        	inputtedNote[i] = arr.getValue(i); //populate the array with the same locations as passed to the class
+    	}
+	}
+}
+
+/**
+ * Checks whether the array is a space note or not
+ * 
+ * @param  array the array to check if it is blank
+ * @return  true is is blank or false if not blank
+ */
+private boolean checkBlank()
+{
+    boolean result = true;
+    for(int i = 0; i < inputtedNote.length; i++)
+    {
+        if(inputtedNote[i] == 1)
+        {
+            result = false;
+        }
+    }
+    return result;
+}
+
+/**
+ * The physical play function. Actually plays the chords that come from the GUI
+ * @throws InterruptedException 
+ */
+
+public void play() //throws InterruptedException
+{
+	  if(timer >= 60 && timer < 90) 
+		{
+			try{Thread.sleep(300);} //sets delays in code(dont go past this point till 300 milliseconds pass)
+			catch(Exception e){};
+		}	
+		if(timer <= 150 && timer >= 90)
+		{
+			try{Thread.sleep(800);}
+			catch(Exception e){};
+		}	
+		if(timer >150 && timer <= 220)
+		{
+			try{Thread.sleep( 1300);}
+			catch(Exception e){};
+		}
+	while(inputtedNote!= null)
+	{	
+		
+		//SOMETIMES THERE IS SLIGHT LAG FROM THE SOUND FILES... WE CAN MAKE MORE IF BLOCKS TO FIX THESE BUT I BELIEVE THEY ARE PRETTY MINMIZED
+		
+    	
+    	if(checkBlank() == false) //if it is not a blank note
+		{
+			for(int i = 0; i < 8; i++)
+			{
+				if(inputtedNote[i] == 1)
+				{
+					note.play(a[i], current.getIndex());
+				}
+				if(i == 7)
+				{
+					try{Thread.sleep((int)metronome);}
+					catch(Exception e){};
+				}
+			}
+		}
+		
+		else //if it is a blank note
+		{
+			note.play(a[8], current.getIndex()); //plays the 9th note on the map the blank note
+			try{Thread.sleep((int)metronome);}
+			catch(Exception e){};
+		}
+		
+		note.stop();
+		current = current.getNext();
+		if(current == null)
+			inputtedNote = null;
+		else
+		{
+			for(int i = 0; i < 8; i++)
+			{
+				inputtedNote[i] = current.getValue(i); //populate the array with the same locations as passed to the class
+			}
+		}
+	}
+}
+}

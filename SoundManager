@@ -1,0 +1,121 @@
+package com.example.melodymachine;
+
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
+
+/**
+ * The Sound Manager
+ * @author Michael
+ *
+ */
+public class SoundManager
+{
+  private Context pContext;		// Local copy of app context
+	private SoundPool pool;		// Our SoundPool instance
+	private float rate = 1.0f;		// Playback rate
+	private float masterVolume = 1.0f;	// Master vloume level
+	private float leftVolume = 1.0f;	// Volume levels for left and right channels
+	private float rightVolume = 1.0f;
+	private float balance = 0.5f;
+	private int stream1 = 0;
+	private int stream2 = 0;
+	private int stream3 = 0;
+	private int stream4 = 0;
+	private int stream5 = 0;
+	private int stream6 = 0;
+	private int stream7 = 0;
+	private int stream8 = 0;
+	private int stream9 = 0;
+	private int currentId = -1;
+	
+	
+	/**
+	 * Creates a soundpool where we will keep track of the audio files... Warning can only go up to 25 sounds, we only have 9 in this file so we are ok.
+	 * @param appCont the context of running sound manager
+	 */
+	public SoundManager(Context appCont)
+	{
+		pool = new SoundPool(25, AudioManager.STREAM_MUSIC, 0);
+		pContext = appCont;
+	}
+	
+	/**
+	 * 
+	 * @param id the id of the file to look for
+	 * @return the streamID
+	 */
+	public int load(int id)
+	{
+		return pool.load(pContext, id, 1);
+	}
+	
+	/**
+	 * Play the sound file
+	 * @param id which sound file to play
+	 */
+	public void play(int id, int index)
+	{
+		if(index == currentId)
+		{
+			if(stream1 == 0)
+				stream1 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream2 == 0)
+				stream2 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream3 == 0)
+				stream3 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream4 == 0)
+				stream4 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream5 == 0)
+				stream5 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream6 == 0)
+				stream6 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream7 == 0)
+				stream7 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream8 == 0)
+				stream8 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+			else if(stream9 == 0)
+				stream9 = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+		}
+		else
+		{
+			currentId = index;
+			stream1 = pool.play(id,  leftVolume, rightVolume, 1, 0, rate);
+		}
+	}
+	
+	/**
+	 * Stop the sound file
+	 * @param id the sound file to stop
+	 */
+	public void stop()
+	{
+		//int stream = pool.play(id, leftVolume, rightVolume, 1, 0, rate);
+		pool.stop(stream1);
+		pool.stop(stream2);
+		pool.stop(stream3);
+		pool.stop(stream4);
+		pool.stop(stream5);
+		pool.stop(stream6);
+		pool.stop(stream7);
+		pool.stop(stream8);
+		pool.stop(stream9);
+		stream1 = 0;
+		stream2 = 0;
+		stream3 = 0;
+		stream4 = 0;
+		stream5 = 0;
+		stream6 = 0;
+		stream7 = 0;
+		stream8 = 0;
+		stream9 = 0;
+	}
+	
+	/**
+	 * Disassembles the Sound Pool
+	 */
+	public void unloadObj()
+	{
+		pool.release();
+	}
+}

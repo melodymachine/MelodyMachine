@@ -1,0 +1,738 @@
+package com.example.melodymachine;
+
+import com.example.melodymachine.R;
+
+import android.os.*;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import android.app.*;
+import android.content.*;
+
+/**
+ * Creates the main display for the Music Machine and sets up the event listeners.
+ * The Music Machine is an app that lets the user input notes and listen to them
+ * in the playback.
+ */
+public class SpinnerActivity extends Activity{
+
+  private Button info, back, next, tempo, play, left, right;
+	private ToggleButton[] buttons = new ToggleButton[32];
+	private ArrayNode first = new ArrayNode();
+	private ArrayNode last = first;
+	private ArrayNode current = first;
+	private int musicTempo = 120;
+	private int nextIndex = 1;
+	final Context context = this;
+	private Dialog tempoDialog;
+	private final int[] a = new int[9];
+    private SoundManager note;
+
+	/**
+	 * When the app creates the main activity, the various objects are
+	 * created. Event listeners are applied and events themselves are set up.
+	 * **/
+    @Override
+	public void onCreate(Bundle savedInstance){
+		super.onCreate(savedInstance);
+		setContentView(R.layout.fu);
+		
+		note = new SoundManager(context);
+		a[1] = note.load(R.raw.a4);
+		a[2] = note.load(R.raw.b4);
+		a[8] = note.load(R.raw.blank);
+		a[3] = note.load(R.raw.c5);
+		a[4] = note.load(R.raw.d5);
+		a[5] = note.load(R.raw.e5);
+		a[6] = note.load(R.raw.f5s);
+		a[0] = note.load(R.raw.g4);
+		a[7] = note.load(R.raw.g5);
+		try {
+			Thread.sleep(2500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		//Creates the dialog pop-up that appears when Tempo is pressed
+		
+		tempoDialog = new Dialog(this);
+		tempoDialog.setContentView(R.layout.tempo_box);
+		tempoDialog.setTitle("Set Tempo");
+		SeekBar sb = (SeekBar) tempoDialog.findViewById(R.id.seekBar1); //sets up scroll bar to set tempo
+		sb.setMax(140);
+		sb.setProgress(musicTempo-60);
+		final TextView seekBarValue = (TextView)tempoDialog.findViewById(R.id.seekbarvalue);
+		seekBarValue.setText(String.valueOf(musicTempo));
+		sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+			@Override
+			   public void onProgressChanged(SeekBar seekBar, int progress,
+			     boolean fromUser) {
+			    seekBarValue.setText(String.valueOf(progress+60));
+			    musicTempo = progress+60;
+			   } 
+
+			   @Override
+			   public void onStartTrackingTouch(SeekBar seekBar) {
+			   } 
+
+			   @Override
+			   public void onStopTrackingTouch(SeekBar seekBar) {
+			   }
+		});
+		Button button = (Button) tempoDialog.findViewById(R.id.closeButton); //sets up button to close dialog
+		button.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				tempoDialog.dismiss();
+			}
+		});
+		
+		//creates the first page of nodes in the arraylist
+		for(int i = 0; i < 3; i++){
+			current.setNext(new ArrayNode(current, null, nextIndex));
+			nextIndex++;
+			current = current.getNext();
+		}
+		current = first;
+		
+		//connects the buttons in the XML to an array for easy access
+		
+		buttons[0] = (ToggleButton) findViewById(R.id.toggleButton1);
+		buttons[1] = (ToggleButton) findViewById(R.id.toggleButton2);
+		buttons[2] = (ToggleButton) findViewById(R.id.toggleButton3);
+		buttons[3] = (ToggleButton) findViewById(R.id.toggleButton4);
+		buttons[4] = (ToggleButton) findViewById(R.id.toggleButton5);
+		buttons[5] = (ToggleButton) findViewById(R.id.toggleButton6);
+		buttons[6] = (ToggleButton) findViewById(R.id.toggleButton7);
+		buttons[7] = (ToggleButton) findViewById(R.id.toggleButton8);
+		buttons[8] = (ToggleButton) findViewById(R.id.toggleButton9);
+		buttons[9] = (ToggleButton) findViewById(R.id.toggleButton10);
+		buttons[10] = (ToggleButton) findViewById(R.id.toggleButton11);
+		buttons[11] = (ToggleButton) findViewById(R.id.toggleButton12);
+		buttons[12] = (ToggleButton) findViewById(R.id.toggleButton13);
+		buttons[13] = (ToggleButton) findViewById(R.id.toggleButton14);
+		buttons[14] = (ToggleButton) findViewById(R.id.toggleButton15);
+		buttons[15] = (ToggleButton) findViewById(R.id.toggleButton16);
+		buttons[16] = (ToggleButton) findViewById(R.id.toggleButton17);
+		buttons[17] = (ToggleButton) findViewById(R.id.toggleButton18);
+		buttons[18] = (ToggleButton) findViewById(R.id.toggleButton19);
+		buttons[19] = (ToggleButton) findViewById(R.id.toggleButton20);
+		buttons[20] = (ToggleButton) findViewById(R.id.toggleButton21);
+		buttons[21] = (ToggleButton) findViewById(R.id.toggleButton22);
+		buttons[22] = (ToggleButton) findViewById(R.id.toggleButton23);
+		buttons[23] = (ToggleButton) findViewById(R.id.toggleButton24);
+		buttons[24] = (ToggleButton) findViewById(R.id.toggleButton25);
+		buttons[25] = (ToggleButton) findViewById(R.id.toggleButton26);
+		buttons[26] = (ToggleButton) findViewById(R.id.toggleButton27);
+		buttons[27] = (ToggleButton) findViewById(R.id.toggleButton28);
+		buttons[28] = (ToggleButton) findViewById(R.id.toggleButton29);
+		buttons[29] = (ToggleButton) findViewById(R.id.toggleButton30);
+		buttons[30] = (ToggleButton) findViewById(R.id.toggleButton31);
+		buttons[31] = (ToggleButton) findViewById(R.id.toggleButton32);
+		
+		//adds event listeners to all buttons
+		//***Could not be done in a loop since internal methods could not read the
+		//***variable i from the loop
+		
+		buttons[0].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(0);
+			}
+		});
+		buttons[1].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(1);
+			}
+		});
+		buttons[2].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(2);
+			}
+		});
+		buttons[3].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(3);
+			}
+		});
+		buttons[4].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(4);
+			}
+		});
+		buttons[5].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(5);
+			}
+		});
+		buttons[6].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(6);
+			}
+		});
+		buttons[7].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(7);
+			}
+		});
+		buttons[8].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(8);
+			}
+		});
+		buttons[9].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(9);
+			}
+		});
+		buttons[10].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(10);
+			}
+		});
+		buttons[11].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(11);
+			}
+		});
+		buttons[12].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(12);
+			}
+		});
+		buttons[13].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(13);
+			}
+		});
+		buttons[14].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(14);
+			}
+		});
+		buttons[15].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(15);
+			}
+		});
+		buttons[16].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(16);
+			}
+		});
+		buttons[17].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(17);
+			}
+		});
+		buttons[18].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(18);
+			}
+		});
+		buttons[19].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(19);
+			}
+		});
+		buttons[20].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(20);
+			}
+		});
+		buttons[21].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(21);
+			}
+		});
+		buttons[22].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(22);
+			}
+		});
+		buttons[23].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(23);
+			}
+		});
+		buttons[24].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(24);
+			}
+		});
+		buttons[25].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(25);
+			}
+		});
+		buttons[26].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(26);
+			}
+		});
+		buttons[27].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(27);
+			}
+		});
+		buttons[28].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(28);
+			}
+		});
+		buttons[29].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(29);
+			}
+		});
+		buttons[30].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(30);
+			}
+		});
+		buttons[31].setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				toggle(31);
+			}
+		});
+		
+		//All other buttons have their event listeners added and have their events overridden
+		
+		info = (Button) findViewById(R.id.infoButton);
+		info.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				createInfoDialog();
+			}
+		});
+		back = (Button) findViewById(R.id.button2);
+		back.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				goToStart();
+			}
+		});
+		next = (Button) findViewById(R.id.Button02);
+		next.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				goToEnd();
+			}
+		});
+		tempo = (Button) findViewById(R.id.button1);
+		tempo.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				setTempo();
+			}
+		});
+		play = (Button) findViewById(R.id.Button01);
+		play.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				play();
+			}
+		});
+		left = (Button) findViewById(R.id.button3);
+		left.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				shiftLeft();
+			}
+		});
+		right = (Button) findViewById(R.id.button4);
+		right.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				shiftRight();
+			}
+		});
+	}
+
+	/**
+	 * Creates a dialog when Info is pressed using the dialog builder.
+	 * Displays simple instructions for the app.
+	 * **/
+	
+	private void createInfoDialog(){
+		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		dialog
+			.setTitle("Info")
+			.setCancelable(true)
+			.setMessage("This is the Music Machine! Press the buttons to create a melody" +
+				" and press play to listen to it. Press Right to create 4 more " +
+				"beats. Navigate by pressing Left/Right or press the To Start/To End buttons " +
+				"to go to the beginning/end. Set how fast you want the music to " +
+				"play by pressing the Tempo button.")
+			.setPositiveButton("OK",new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface d, int id){
+					
+				}
+			});
+		AlertDialog infoAlert = dialog.create();
+		infoAlert.show();
+	}
+	
+	/**
+	 * Moves to the first set of notes.
+	 * **/
+	
+	private void goToStart()
+	{
+		current = first;
+		clear();
+		load();
+	}
+	
+	/**
+	 * Moves to the last set of notes.
+	 * **/
+	
+	private void goToEnd()
+	{
+		if(last.getIndex() % 4 == 0)
+			current = last;
+		else if(last.getIndex() % 4 == 1)
+			current = last.getPrev().getPrev().getPrev();
+		else if(last.getIndex() % 4 == 2)
+			current = last.getPrev().getPrev();
+		else
+			current = last.getPrev();
+		clear();
+		load();
+	}
+	
+	/**
+	 * Reveals the tempo dialog.
+	 * **/
+	
+	private void setTempo()
+	{
+		tempoDialog.show();
+	}
+	
+	/**
+	 * Calls the processing in order to play the notes.
+	 * Notes are passed as arrays one by one.
+	 * **/
+	
+	private void play()
+	{
+		//current = first;
+		/*while(current != null)
+		{
+			ChordArray player = new ChordArray(musicTempo, current.getArray(), context, a, note);
+			player.play();
+			current = current.getNext();
+		}*/
+		ChordArray player = new ChordArray(musicTempo, first, context, a, note);
+		player.play();
+		//current = first;
+		clear();
+		load();
+	}
+	
+	/**
+	 * Checks when a toggle button is toggled and changes its value in the array.
+	 * **/
+	
+	private void toggle(int i){
+		int value = 0;
+		if(i < 8)
+		{
+			if(current.getValue(i%8) == 0)
+				value = 1;
+			else
+				value = 0;
+			current.setArray(i%8, value);
+		}
+		else if(i < 16)
+		{
+			if(current.getNext().getValue(i%8) == 0)
+				value = 1;
+			else
+				value = 0;
+			current.getNext().setArray(i%8, value);
+		}
+		else if(i < 24)
+		{
+			if(current.getNext().getNext().getValue(i%8) == 0)
+				value = 1;
+			else
+				value = 0;
+			current.getNext().getNext().setArray(i%8, value);
+		}
+		else if(i < 32)
+		{
+			if(current.getNext().getNext().getNext().getValue(i%8) == 0)
+				value = 1;
+			else
+				value = 0;
+			current.getNext().getNext().getNext().setArray(i%8, value);
+		}
+	}
+	
+	/**
+	 * Moves back 4 columns of notes if not at the beginning
+	 * **/
+	
+	private void shiftLeft(){
+		if(current.getIndex() > 0)
+		{
+			current = current.getPrev().getPrev().getPrev().getPrev();
+			clear();
+			load();
+		}
+	}
+	
+	/**
+	 * Moves forward 4 columns of notes. If nothing exists past the current 4 columns,
+	 * four more columns are created first.
+	 * **/
+	
+	private void shiftRight(){
+		ArrayNode compare = current.getNext().getNext().getNext().getNext();
+		if(compare == null)
+		{
+			compare = current.getNext().getNext().getNext();
+			for(int i = 0; i < 4; i++){
+				compare.setNext(new ArrayNode(compare, null, nextIndex));
+				nextIndex++;
+				compare = compare.getNext();
+			}
+			current = compare.getPrev().getPrev().getPrev();
+			last = current;
+			clear();
+			load();
+		}
+		else
+		{
+			current = current.getNext().getNext().getNext().getNext();
+			clear();
+			load();
+		}
+	}
+	
+	/**
+	 * Clears the screen of notes.
+	 * **/
+	
+	private void clear()
+	{
+		for(int i = 0; i < 32; i++)
+		{
+			buttons[i].setChecked(false);
+		}
+	}
+	
+	/**
+	 * Refreshes the screen by loading the notes stored in the arraylist.
+	 * **/
+	
+	private void load()
+	{
+		boolean v = true;
+	
+		if(current.getValue(0) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[0].setChecked(v);
+		if(current.getValue(1) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[1].setChecked(v);
+		if(current.getValue(2) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[2].setChecked(v);
+		if(current.getValue(3) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[3].setChecked(v);
+		if(current.getValue(4) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[4].setChecked(v);
+		if(current.getValue(5) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[5].setChecked(v);
+		if(current.getValue(6) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[6].setChecked(v);
+		if(current.getValue(7) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[7].setChecked(v);
+		
+		current = current.getNext();
+		
+		if(current.getValue(0) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[8].setChecked(v);
+		if(current.getValue(1) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[9].setChecked(v);
+		if(current.getValue(2) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[10].setChecked(v);
+		if(current.getValue(3) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[11].setChecked(v);
+		if(current.getValue(4) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[12].setChecked(v);
+		if(current.getValue(5) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[13].setChecked(v);
+		if(current.getValue(6) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[14].setChecked(v);
+		
+		if(current.getValue(7) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[15].setChecked(v);
+		
+		current = current.getNext();
+		
+		if(current.getValue(0) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[16].setChecked(v);
+		if(current.getValue(1) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[17].setChecked(v);
+		if(current.getValue(2) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[18].setChecked(v);
+		if(current.getValue(3) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[19].setChecked(v);
+		if(current.getValue(4) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[20].setChecked(v);
+		if(current.getValue(5) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[21].setChecked(v);
+		if(current.getValue(6) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[22].setChecked(v);
+		if(current.getValue(7) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[23].setChecked(v);
+		
+		current = current.getNext();
+		
+		if(current.getValue(0) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[24].setChecked(v);
+		if(current.getValue(1) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[25].setChecked(v);
+		if(current.getValue(2) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[26].setChecked(v);
+		if(current.getValue(3) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[27].setChecked(v);
+		if(current.getValue(4) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[28].setChecked(v);
+		if(current.getValue(5) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[29].setChecked(v);
+		if(current.getValue(6) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[30].setChecked(v);
+		if(current.getValue(7) == 0)
+			v = false;
+		else
+			v = true;
+		buttons[31].setChecked(v);
+		current = current.getPrev().getPrev().getPrev();
+	}
+}

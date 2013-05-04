@@ -1,0 +1,93 @@
+package com.example.melodymachine;
+/*
+ * Christopher Eng
+ * Last edit: May 2, 2013
+ * 
+ * Data structure that contains an array and the references to the nodes directly before and after it.
+ * */
+
+public class ArrayNode {
+  private int array[];
+	private ArrayNode prev, next;
+	private int index;
+	
+	/**
+	 * Default constructor creates an int array, initializes it, sets index to 0, and sets references to null
+	 * **/
+	public ArrayNode(){
+		array = new int[8];
+		for(int i = 0; i < 8; i++)
+			array[i] = 0;
+		prev = null;
+		next = null;
+		index = 0;
+	}
+	
+	/**
+	 * Constructor creates an int array, initializes it, sets index to i, and sets references to what it is passed
+	 * **/
+	public ArrayNode(ArrayNode p, ArrayNode n, int i){
+		array = new int[8];
+		for(int j = 0; j < 8; j++)
+			array[j] = 0;
+		prev = p;
+		next = n;
+		index = i;
+	}
+	
+	/**
+	 * Returns next node
+	 * **/
+	public ArrayNode getNext(){
+		return next;
+	}
+	
+	/**
+	 * Returns previous node
+	 * **/
+	public ArrayNode getPrev(){
+		return prev;
+	}
+	
+	/**
+	 * Returns array
+	 * **/
+	public int[] getArray(){
+		return array;
+	}
+	
+	/**
+	 * Returns index
+	 * **/
+	public int getIndex(){
+		return index;
+	}
+	
+	/**
+	 * Returns value at a certain point in the array
+	 * **/
+	public int getValue(int i){
+		return array[i];
+	}
+	
+	/**
+	 * Sets reference to next node
+	 * **/
+	public void setNext(ArrayNode n){
+		next = n;
+	}
+	
+	/**
+	 * Sets reference to previous node
+	 * **/
+	public void setPrev(ArrayNode p){
+		prev = p;
+	}
+	
+	/**
+	 * Sets value at a certain index in the array
+	 * **/
+	public void setArray(int i, int value){
+		array[i] = value;
+	}
+}

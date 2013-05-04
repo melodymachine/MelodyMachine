@@ -1,0 +1,431 @@
+<!-- Christopher Eng
+Last edit: May 2, 2013
+
+Sets up the main layout of the app -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:id="@+id/yourMom" >
+
+  <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+	<!-- Creates a table of buttons that can be toggled -->
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
+
+            <TextView
+        		android:id="@+id/G4"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="G"
+        		android:textColor="#ffffff"/>
+            
+            <ToggleButton
+                android:id="@+id/toggleButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/A4"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="A"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/B4"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="B"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/C5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="C"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/D5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="D"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/E5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="E"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/F5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="F#"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+        		android:id="@+id/G5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content" 
+        		android:text="G"
+        		android:textColor="#ffffff"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="40dip"
+                android:text="ToggleButton" />
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- Creates a button to set tempo -->
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tableLayout1"
+        android:layout_below="@+id/tableLayout1"
+        android:minWidth="128dip"
+        android:text="Tempo" />
+
+    <!-- Creates a button to go to the end of the music -->
+    <Button
+        android:id="@+id/Button02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout1"
+        android:layout_alignParentRight="true"
+        android:minWidth="128dip"
+        android:text="To End" />
+
+    <!-- Creates a button to go to the start of the music -->
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout1"
+        android:layout_alignParentLeft="true"
+        android:minWidth="128dip"
+        android:text="To Start" />
+
+    <!-- Creates a button to see the instructions for the app -->
+    <Button
+        android:id="@+id/infoButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:text="Info" />
+
+    <!-- Creates a button to play the music that is written -->
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignRight="@+id/tableLayout1"
+        android:layout_alignTop="@+id/button1"
+        android:minWidth="128dip"
+        android:text="Play" />
+
+    <!--  Creates a button to scroll left -->
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/Button01"
+        android:text="Left" />
+
+    <!-- Creates a button to scroll right -->
+    <Button
+        android:id="@+id/button4"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button01"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Right" />
+
+	</RelativeLayout>
+
+</LinearLayout>
